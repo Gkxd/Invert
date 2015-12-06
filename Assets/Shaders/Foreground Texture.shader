@@ -7,13 +7,14 @@
 	}
 	SubShader
 	{
-		Tags { "RenderType"="Transparent" "Queue"="Overlay+1500" "PreviewType"="Plane"}
+		Tags { "RenderType"="Transparent" "Queue"="Overlay+1000" "PreviewType"="Plane"}
 		LOD 100
 
 		Pass
 		{
 			Cull Off
 			ZWrite Off
+            ZTest Off
 			Blend SrcAlpha OneMinusSrcAlpha
 
 			CGPROGRAM

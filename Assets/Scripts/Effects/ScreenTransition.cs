@@ -93,6 +93,7 @@ public class ScreenTransition : MonoBehaviour {
                 loadCheckpointTransitionA = false;
                 loadCheckpointTransitionB = true;
 
+                FullScreenInvert.Reset();
                 spawnPlayer.SetActive(true);
                 spawnPlayer.GetComponent<PlayerController>().respawnAtCheckpoint();
             }

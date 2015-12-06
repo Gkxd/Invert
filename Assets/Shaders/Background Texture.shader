@@ -14,6 +14,7 @@
 		{
 			Cull Off
 			ZWrite Off
+            ZTest Off
 			Blend SrcAlpha OneMinusSrcAlpha
 
 			CGPROGRAM

@@ -8,13 +8,15 @@ public class ChangeColorWithCurve : MonoBehaviour {
     public AnimationCurve curve;
 
     private Material m;
+    private float startTime;
 
     void Start() {
         m = GetComponent<Renderer>().material;
+        startTime = Time.time;
     }
 
 
     void Update() {
-        m.SetColor("_Color", color.Evaluate(curve.Evaluate(Time.time)));
+        m.SetColor("_Color", color.Evaluate(curve.Evaluate(Time.time - startTime)));
     }
 }

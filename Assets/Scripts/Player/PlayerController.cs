@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour {
     public ScreenTransition screenTransition;
     public LayerMask groundLayer;
     public LayerMask invertLayer;
+    public ParticleSystem playerParticles;
 
     [Header("Audio Setttings")]
     public AudioSource playerAudio;
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour {
     public Vector3 checkpoint { get; set; }
 
     private bool jumpPending;
+    private bool gravityIncrease;
 
     void Start() {
         checkpoint = rigidbody.position;
@@ -33,6 +35,9 @@ public class PlayerController : MonoBehaviour {
 
         if (horizontalSpeed != 0) {
             animation.setDirection(horizontalSpeed);
+            if (Physics.Raycast(transform.position, inverted ? Vector3.up : Vector3.down, 0.6f, groundLayer) && Time.time % 0.5f < 0.1f) {
+                animation.addImpulse(0.5f);
+            }
         }
 
         float verticalSpeed = rigidbody.velocity.y;
@@ -46,7 +51,7 @@ public class PlayerController : MonoBehaviour {
         }
 
         rigidbody.velocity = new Vector3(horizontalSpeed, verticalSpeed);
-        rigidbody.AddForce(gravity * (inverted ? -1 : 1));
+        rigidbody.AddForce(gravity * (inverted ? -1 : 1) * (gravityIncrease ? 2 : 1));
     }
 
     void Update() {
@@ -70,6 +75,14 @@ public class PlayerController : MonoBehaviour {
                 }
             }
         }
+
+        gravityIncrease = Input.GetKey(KeyCode.LeftShift);
+
+        /*
+        if (Input.GetKeyDown(KeyCode.B)) {
+            playerParticles.Emit(500);
+        }
+         */
     }
 
     void OnCollisionEnter(Collision c) {

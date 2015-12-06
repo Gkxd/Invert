@@ -9,6 +9,7 @@
 		{
 			Cull Off
 			ZWrite Off
+            ZTest Off
 
 			CGPROGRAM
 			#pragma vertex vert

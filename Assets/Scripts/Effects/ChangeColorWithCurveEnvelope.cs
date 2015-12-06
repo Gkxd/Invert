@@ -11,13 +11,20 @@ public class ChangeColorWithCurveEnvelope : MonoBehaviour {
 
     private Material m;
 
+    private float startTime;
+
     void Start() {
+        startTime = Time.time;
         m = GetComponent<Renderer>().material;
     }
 
 
     void Update() {
-        Color baseColor = color.Evaluate(curve.Evaluate(Time.time));
-        m.SetColor("_Color", baseColor * new Color(1, 1, 1, envelope.Evaluate(Time.timeSinceLevelLoad - delay)));
+        Color baseColor = color.Evaluate(curve.Evaluate(Time.time - startTime));
+        m.SetColor("_Color", baseColor * new Color(1, 1, 1, envelope.Evaluate((Time.time - startTime) - delay)));
+    }
+
+    void OnEnable() {
+        startTime = Time.time;
     }
 }

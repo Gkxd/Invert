@@ -2,13 +2,14 @@
 {
 	SubShader
 	{
-		Tags { "RenderType"="Opaque" "Queue"="Overlay+1000" "PreviewType"="Plane"}
+		Tags { "RenderType"="Opaque" "Queue"="Overlay" "PreviewType"="Plane"}
 		LOD 100
 
 		Pass
 		{
 			Cull Off
 			ZWrite Off
+            ZTest Off
 
 			CGPROGRAM
 			#pragma vertex vert

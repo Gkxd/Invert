@@ -8,6 +8,7 @@ public class GameOptions : MonoBehaviour {
 
     public static int Difficulty {
         get { if (instance) return instance.difficulty; return -1; }
+        set { if (instance) instance.difficulty = value; return; }
     }
 
     public static Material ColorScheme {
@@ -35,6 +36,10 @@ public class GameOptions : MonoBehaviour {
         if (instance && !instance.unlockedColorSchemes.Contains(colorSchemeID)) {
             instance.unlockedColorSchemes.Add(colorSchemeID);
             instance.colorScheme = colorSchemeID;
+
+            if (colorSchemeID != 0) {
+                Notification.NotifyColorSchemeUnlocked();
+            }
 
             return true;
         }

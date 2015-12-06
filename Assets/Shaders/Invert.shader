@@ -2,13 +2,14 @@
 {
 	SubShader
 	{
-		Tags { "RenderType"="Opaque" "Queue"="Overlay" "PreviewType"="Plane"}
+		Tags { "RenderType"="Opaque" "Queue"="Geometry+1000" "PreviewType"="Plane"}
 		LOD 100
 
 		Pass
 		{
 			Cull Off
 			ZWrite Off
+            ZTest Off
 			Blend OneMinusDstColor Zero
 
 			CGPROGRAM

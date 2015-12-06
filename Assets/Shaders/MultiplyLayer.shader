@@ -13,6 +13,7 @@
 		{
 			Cull Off
 			ZWrite Off
+            ZTest Off
 			Blend DstColor OneMinusSrcAlpha
 
 			CGPROGRAM

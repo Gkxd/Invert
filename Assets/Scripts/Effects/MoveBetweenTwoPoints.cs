@@ -11,12 +11,16 @@ public class MoveBetweenTwoPoints : MonoBehaviour {
     private Vector3 a;
     private Vector3 b;
 
+    private float startTime;
+
     void Start() {
         a = A.position;
         b = B.position;
+
+        startTime = Time.time;
     }
 
     void Update() {
-        transform.position = Vector3.Lerp(a, b, movement.Evaluate(Time.time));
+        transform.position = Vector3.Lerp(a, b, movement.Evaluate(Time.time - startTime));
     }
 }

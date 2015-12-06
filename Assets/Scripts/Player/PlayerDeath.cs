@@ -19,7 +19,6 @@ public class PlayerDeath : MonoBehaviour {
             ScreenTransition screenTransition = player.transform.parent.Find("Camera/Foreground Camera/ScreenTransition").GetComponent<ScreenTransition>();
             screenTransition.loadPlayerCheckpoint(player);
             Destroy(gameObject, 1);
-
             respawned = true;
         }
     }

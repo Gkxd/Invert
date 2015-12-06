@@ -7,6 +7,5 @@ public class OpenURL : MonoBehaviour {
 
     void OnMouseDown() {
         Application.OpenURL(url);
-        Debug.Log("Hello");
     }
 }
