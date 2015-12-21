@@ -1,7 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class ScreenTransition : MonoBehaviour {
+
+    public static ScreenTransition instance;
+    public static bool isTransitioning;
 
     public Camera camera;
     public GameObject screenTransitionQuad;
@@ -57,6 +61,11 @@ public class ScreenTransition : MonoBehaviour {
         targetTime = domainMax;
 
         nextSceneName = "";
+
+        instance = this;
+
+        isTransitioning = true;
+        StartCoroutine(setTransitioningFalse(0.5f));
     }
 
     void Update() {
@@ -84,7 +93,7 @@ public class ScreenTransition : MonoBehaviour {
 
         if (time < 0) {
             if (nextSceneName != "") {
-                Application.LoadLevel(nextSceneName);
+                SceneManager.LoadScene(nextSceneName);
             }
             else if (loadCheckpointTransitionA) {
                 flipDelays();
@@ -117,5 +126,12 @@ public class ScreenTransition : MonoBehaviour {
         loadCheckpointTransitionB = false;
         targetTime = domainMin;
         spawnPlayer = player;
+        isTransitioning = true;
+        StartCoroutine(setTransitioningFalse(1.1f));
+    }
+
+    public IEnumerator setTransitioningFalse(float delay) {
+        yield return new WaitForSeconds(delay);
+        isTransitioning = false;
     }
 }

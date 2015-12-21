@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class FullScreenInvert : MonoBehaviour {
 
     private static bool switchInvert, resetInvert;
+    private static Vector3 spawnLocation;
 
     public GameObject invert;
     public Transform player;
@@ -18,7 +19,7 @@ public class FullScreenInvert : MonoBehaviour {
 
     void Update() {
         if (switchInvert) {
-            GameObject spawnedInvert = (GameObject)Instantiate(invert, transform.position, Quaternion.identity);
+            GameObject spawnedInvert = (GameObject)Instantiate(invert, spawnLocation, Quaternion.identity);
             spawnedInvert.SetActive(true);
             spawnedInverts.Enqueue(spawnedInvert);
 
@@ -40,8 +41,9 @@ public class FullScreenInvert : MonoBehaviour {
         transform.position = player.position;
     }
 
-    public static void Toggle() {
+    public static void Toggle(Vector3 location) {
         switchInvert = true;
+        spawnLocation = location;
     }
 
     public static void Reset() {

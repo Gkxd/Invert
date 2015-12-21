@@ -34,7 +34,7 @@ public class Checkpoint : MonoBehaviour {
         if (!hasEntered) {
             hasEntered = true;
             other.gameObject.GetComponent<PlayerController>().checkpoint = transform.position;
-            audioSource.PlayOneShot(audioClip);
+            audioSource.PlayOneShot(audioClip, AudioManager.sfxVolume);
             Destroy(gameObject, 2);
         }
     }

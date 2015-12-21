@@ -12,6 +12,8 @@ public class PlayerDeath : MonoBehaviour {
     void Start() {
         startTime = Time.time;
         GameScore.AddDeath();
+
+        GetComponent<AudioSource>().volume = AudioManager.sfxVolume;
     }
 
     void Update() {

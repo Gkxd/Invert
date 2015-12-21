@@ -15,9 +15,17 @@ public class DisplayGameScore : MonoBehaviour {
     void Start() {
         timeSpan = TimeSpan.FromSeconds(GameScore.TimeTaken);
 
-        string text = string.Format("{0:D2}:{1:D2}:{2:D2}:{3:D3}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds);
-        text += "\n" + GameScore.NumberOfDeaths;
-        text += "\n" + GameScore.SecretsFound + "/2";
+        string text;
+
+        if (GameScore.ScoreValid) {
+            text = string.Format("{0:D2}:{1:D2}:{2:D2}:{3:D3}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds);
+            text += "\n" + GameScore.NumberOfDeaths;
+        }
+        else {
+            text = "---\n---";
+        }
+
+        text += "\n" + GameScore.SecretsFound + "/???";
 
         textMesh.text = text;
     }

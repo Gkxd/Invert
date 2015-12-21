@@ -9,20 +9,20 @@ public class Goal : MonoBehaviour {
 
     void OnTriggerStay(Collider other) {
         if (!activated) {
-            if (Input.GetKeyDown(KeyCode.Space)) {
-                if (destinationName == "") {
-                    Debug.Log("Reached goal. (No scene assigned)");
-                }
-                else {
-                    ScreenTransition screenTransition = other.transform.parent.Find("Camera/Foreground Camera/ScreenTransition").GetComponent<ScreenTransition>();
-
-                    screenTransition.loadScene(destinationName);
-
-                    Instantiate(soundEffectPrefab);
-                }
-
-                activated = true;
+            if (destinationName == "") {
+                Debug.Log("Reached goal. (No scene assigned)");
             }
+            else {
+                //ScreenTransition screenTransition = other.transform.parent.Find("Camera/Foreground Camera/ScreenTransition").GetComponent<ScreenTransition>();
+
+                //screenTransition.loadScene(destinationName);
+
+                ScreenTransition.instance.loadScene(destinationName);
+
+                Instantiate(soundEffectPrefab);
+            }
+
+            activated = true;
         }
     }
 }
