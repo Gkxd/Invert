@@ -1,0 +1,3 @@
+[submodule "Assets/External/Submodules/UsefulThings"]
+	path = Assets/External/Submodules/UsefulThings
+	url = https://github.com/Gkxd/UsefulThings.git
