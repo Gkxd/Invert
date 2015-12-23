@@ -12,12 +12,14 @@ public class Notification : MonoBehaviour {
         if (notifyColorScheme) {
             GameObject message = (GameObject)Instantiate(colorSchemeUnlocked);
             message.transform.parent = transform;
+            message.transform.localPosition = Vector3.forward;
             notifyColorScheme = false;
         }
 
         if (notifySecret) {
             GameObject message = (GameObject)Instantiate(secretFound);
             message.transform.parent = transform;
+            message.transform.localPosition = Vector3.forward;
             notifySecret = false;
         }
     }
