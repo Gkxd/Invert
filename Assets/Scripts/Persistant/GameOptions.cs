@@ -18,8 +18,8 @@ public class GameOptions : MonoBehaviour {
     public int difficulty;
     public List<Material> colorSchemes;
 
-    private List<int> unlockedColorSchemes; // Indices into color scheme array
-    private int colorScheme; // Index into color scheme array
+    public List<int> unlockedColorSchemes { get; set; } // Indices into color scheme array
+    public int colorScheme { get; set; } // Index into color scheme array
 
     void Awake() {
         DontDestroyOnLoad(this);

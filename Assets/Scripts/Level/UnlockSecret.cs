@@ -6,7 +6,6 @@ public class UnlockSecret : MonoBehaviour {
 
     void OnTriggerEnter(Collider other) {
         GameScore.AddSecret(secretID);
-        Notification.NotifySecretFound();
         Destroy(gameObject);
     }
 }
