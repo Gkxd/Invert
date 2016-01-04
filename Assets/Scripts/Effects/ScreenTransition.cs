@@ -35,19 +35,21 @@ public class ScreenTransition : MonoBehaviour {
     private GameObject spawnPlayer;
 
     void Start() {
-        int numQuadX = Screen.width / quadPixelSize;
-        int numQuadY = Screen.height / quadPixelSize;
+        int numQuadX = camera.pixelWidth / quadPixelSize + 1;
+        int numQuadY = camera.pixelHeight / quadPixelSize + 1;
+
+        Debug.Log(camera.pixelHeight + " " + camera.pixelWidth);
 
         quads = new GameObject[numQuadX + 1, numQuadY + 1];
 
-        Vector3 worldStartPosition = camera.ScreenToWorldPoint(Vector3.zero);
-        Vector3 worldOffset = camera.ScreenToWorldPoint(new Vector3(quadPixelSize, quadPixelSize, 2)) - worldStartPosition;
+        Vector3 worldStartPosition = camera.ViewportToWorldPoint(Vector3.zero);
+        Vector3 worldOffset = camera.ScreenToWorldPoint(new Vector3(quadPixelSize, quadPixelSize, 2)) - camera.ScreenToWorldPoint(Vector3.zero);
 
         baseScale = new Vector3(worldOffset.x + overlap, worldOffset.y + overlap, 1);
 
         for (int xi = 0; xi <= numQuadX; xi++) {
             for (int yi = 0; yi <= numQuadY; yi++) {
-                Vector3 position = worldStartPosition + worldOffset / 2 + Vector3.Scale(worldOffset, new Vector3(xi, yi, 1));
+                Vector3 position = worldStartPosition + Vector3.Scale(worldOffset, new Vector3(xi, yi, 1));
 
                 quads[xi, yi] = (GameObject)Instantiate(screenTransitionQuad, position, Quaternion.identity);
                 quads[xi, yi].name = "Screen Transition Quad (" + xi + ", " + yi + ")";
