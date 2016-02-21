@@ -19,9 +19,7 @@ public class FullScreenInvert : MonoBehaviour {
 
     void Update() {
         if (switchInvert) {
-            GameObject spawnedInvert = (GameObject)Instantiate(invert, spawnLocation, Quaternion.identity);
-            spawnedInvert.SetActive(true);
-            spawnedInverts.Enqueue(spawnedInvert);
+            spawnInvert();
 
             if (spawnedInverts.Count > 0 && spawnedInverts.Count % 2 == 0) {
                 Destroy(spawnedInverts.Dequeue(), 2);
@@ -35,10 +33,17 @@ public class FullScreenInvert : MonoBehaviour {
             while (spawnedInverts.Count > 0) {
                 Destroy(spawnedInverts.Dequeue());
             }
+
             resetInvert = false;
         }
 
         transform.position = player.position;
+    }
+
+    private void spawnInvert() {
+        GameObject spawnedInvert = (GameObject)Instantiate(invert, spawnLocation, Quaternion.identity);
+        spawnedInvert.SetActive(true);
+        spawnedInverts.Enqueue(spawnedInvert);
     }
 
     public static void Toggle(Vector3 location) {

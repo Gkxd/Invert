@@ -8,25 +8,27 @@ public class LoadLevelButton : MonoBehaviour {
     public Button button;
     public Text text;
 
-    public string levelName;
+    public int levelIndex;
 
     void Start() {
-        if (!GameScore.LevelUnlocked(levelName)) {
+        if (!(levelIndex == 0 || GameScore.IsLevelComplete(levelIndex - 1))) {
             scaleButtonWithMouse.enabled = false;
             button.enabled = false;
             text.color = new Color(0, 0, 0, 0.1f);
         }
     }
 
+    // Editor Convenience
     void Reset() {
         scaleButtonWithMouse = GetComponent<ScaleButtonWithMouse>();
         button = GetComponent<Button>();
         text = transform.Find("Text").GetComponent<Text>();
     }
 
+    // Called On Button Click
     public void loadLevel() {
-        ScreenTransition.instance.loadScene(levelName);
+        ScreenTransition.instance.loadScene(Levels.GetLevelFromIndex(levelIndex));
         GameScore.ResetScore();
-        GameScore.ScoreValid = false;
+        GameScore.ScoreMode = ScoreMode.LEVEL;
     }
 }

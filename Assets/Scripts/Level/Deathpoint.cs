@@ -4,9 +4,10 @@ using System.Collections;
 public class Deathpoint : MonoBehaviour {
     public GameObject playerDeathPrefab;
     void OnTriggerEnter(Collider other) {
-        other.gameObject.SetActive(false);
-        GameObject playerDeath = (GameObject)Instantiate(playerDeathPrefab, other.transform.position, Quaternion.identity);
+        other.gameObject.GetComponent<PlayerController>().respawnAtCheckpoint();
+        PlayerCamera.LerpMovement();
+        FullScreenInvert.Reset();
 
-        playerDeath.GetComponent<PlayerDeath>().player = other.gameObject;
+        GameObject playerDeath = (GameObject)Instantiate(playerDeathPrefab, other.transform.position, Quaternion.identity);
     }
 }

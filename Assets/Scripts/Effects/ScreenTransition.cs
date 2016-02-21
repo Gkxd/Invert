@@ -38,8 +38,6 @@ public class ScreenTransition : MonoBehaviour {
         int numQuadX = camera.pixelWidth / quadPixelSize + 1;
         int numQuadY = camera.pixelHeight / quadPixelSize + 1;
 
-        Debug.Log(camera.pixelHeight + " " + camera.pixelWidth);
-
         quads = new GameObject[numQuadX + 1, numQuadY + 1];
 
         Vector3 worldStartPosition = camera.ViewportToWorldPoint(Vector3.zero);

@@ -27,6 +27,9 @@ public class GameOptions : MonoBehaviour {
         if (!instance) {
             instance = this;
         }
+        else {
+            Destroy(gameObject);
+        }
 
         unlockedColorSchemes = new List<int>();
         unlockedColorSchemes.Add(0);

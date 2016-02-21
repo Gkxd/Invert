@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UsefulThings;
 
 public class PlayerBodyAnimation : MonoBehaviour {
 
@@ -42,6 +43,9 @@ public class PlayerBodyAnimation : MonoBehaviour {
     }
 
     public void addImpulse(float amount) {
+        if (amount > 20) {
+            CameraShake.ShakeCamera((amount - 19)/5, 0.3f);
+        }
         springVelocity -= Mathf.Clamp(amount, 0, 10);
     }
 

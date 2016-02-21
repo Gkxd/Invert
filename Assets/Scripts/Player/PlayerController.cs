@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour {
 
         rigidbody.AddForce(gravity * (inverted ? -1 : 1));
 
-        if (Input.GetKey(KeyCode.Space) && !ToggleGameUI.IsGamePaused) {
+        if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Joystick1Button0)) && !ToggleGameUI.IsGamePaused) {
             rigidbody.AddForce(jumpForce * (inverted ? -1 : 1));
         }
     }
@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour {
         Ray r = camera.ScreenPointToRay(screenPosition);
         inverted = Physics.RaycastAll(r, 10, invertLayer).Length % 2 != 0;
 
-        if (Input.GetKeyDown(KeyCode.Space) && !ToggleGameUI.IsGamePaused) {
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Joystick1Button0)) && !ToggleGameUI.IsGamePaused) {
             if (isTouchingGround()) {
                 jumpPending = true;
             }

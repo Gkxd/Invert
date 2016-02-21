@@ -3,14 +3,10 @@ using System.Collections;
 
 public class InvertToggle : MonoBehaviour {
 
-    public float delay = 1;
+    public AudioClip soundEffect;
 
-    private float lastTimeActivated;
-
-    void OnTriggerStay(Collider other) {
-        if (Time.time - lastTimeActivated > delay) {
-            FullScreenInvert.Toggle(transform.position);
-            lastTimeActivated = Time.time;
-        }
+    void OnTriggerEnter(Collider other) {
+        FullScreenInvert.Toggle(transform.position);
+        //AudioManager.SpawnSoundEffect(soundEffect, 1, transform);
     }
 }

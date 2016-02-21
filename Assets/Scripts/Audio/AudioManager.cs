@@ -38,4 +38,17 @@ public class AudioManager : MonoBehaviour {
     public void setSfxVolume(float v) {
         sfxVolume = v;
     }
+
+    public static void SpawnSoundEffect(AudioClip sfx, float length, Transform t) {
+        GameObject soundEffectObject = new GameObject("Spawned Sound Effect");
+        soundEffectObject.transform.position = t.position;
+
+        AudioSource soundEffectSource = soundEffectObject.AddComponent<AudioSource>();
+        soundEffectSource.clip = sfx;
+        soundEffectSource.volume = sfxVolume;
+        soundEffectSource.Play();
+
+        DontDestroyOnLoad(soundEffectObject);
+        Destroy(soundEffectObject, length);
+    }
 }

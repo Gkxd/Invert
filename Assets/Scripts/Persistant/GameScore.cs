@@ -2,20 +2,23 @@
 using System.Collections;
 using System.Collections.Generic;
 
+public enum ScoreMode {
+    SPEEDRUN, LEVEL
+}
 public class GameScore : MonoBehaviour {
-    public bool resetData;
 
     public static GameScore instance;
 
-    public static bool ScoreValid { get; set; }
+    public static ScoreMode ScoreMode;
     public static int NumberOfDeaths { get { if (instance) return instance.numberOfDeaths; return 0; } }
     public static float TimeTaken { get { if (instance) return Time.time - instance.startTime; return 0; } }
     public static int SecretsFound { get { if (instance) return instance.secretsFound.Count; return 0; } }
+    public static int CompletionScore { get { if (instance) return instance.completedLevels.Count + instance.secretsFound.Count; return 0; } }
 
     private float startTime;
     private int numberOfDeaths;
     private List<int> secretsFound;
-    private List<string> unlockedLevels;
+    private List<string> completedLevels;
 
     private bool saveOnExit;
 
@@ -23,7 +26,7 @@ public class GameScore : MonoBehaviour {
         DontDestroyOnLoad(this);
 
         secretsFound = new List<int>();
-        unlockedLevels = new List<string>();
+        completedLevels = new List<string>();
 
         if (!instance) {
             instance = this;
@@ -69,24 +72,25 @@ public class GameScore : MonoBehaviour {
         }
     }
 
-    public static void UnlockLevel(string level) {
+    public static void CompleteLevel(string level) {
         if (instance) {
-            if (!instance.unlockedLevels.Contains(level)) {
-                instance.unlockedLevels.Add(level);
+            if (!instance.completedLevels.Contains(level)) {
+                instance.completedLevels.Add(level);
             }
         }
     }
 
-    public static bool LevelUnlocked(string level) {
+    public static bool IsLevelComplete(int levelIndex) {
         if (instance) {
-            return instance.unlockedLevels.Contains(level);
+            return instance.completedLevels.Contains(Levels.GetLevelFromIndex(levelIndex));
         }
         return false;
     }
 
+
     public static void SaveAsString() {
         string gameData = "Version 1\n";
-        foreach (string s in instance.unlockedLevels) {
+        foreach (string s in instance.completedLevels) {
             if (s == "") continue;
             gameData += s + ",";
         }
@@ -122,11 +126,11 @@ public class GameScore : MonoBehaviour {
             return;
         }
 
-        string[] unlockedLevels = data[1].Split(',');
+        string[] completedLevels = data[1].Split(',');
 
-        foreach (string s in unlockedLevels) {
+        foreach (string s in completedLevels) {
             if (s == "") continue;
-            instance.unlockedLevels.Add(s);
+            instance.completedLevels.Add(s);
         }
 
         string[] secretsFound = data[2].Split(',');
