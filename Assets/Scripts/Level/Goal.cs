@@ -13,12 +13,18 @@ public static class Levels {
         "Level_B1",
         "Level_B2",
         "Level_B3",
-        "Level_B4",
-        "Level_B5",
+        //"Level_B4",
+        //"Level_B5",
         "Level_C1",
         "Level_C2",
         "Level_C3",
-        "Level_C4"
+        "Level_C4",
+        "Level_C5",
+        "Level_D1",
+        "Level_D2",
+        "Level_D3",
+        "Level_D4",
+        "Level_D5",
     };
 
     public static string GetLevelFromIndex(int level) {
